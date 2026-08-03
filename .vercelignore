@@ -7,6 +7,3 @@ pgdata
 .DS_Store
 *.log
 coverage.out
-
-# Go test/build artifacts — not needed for the api function build
-backend/**/*_test.go

@@ -9,7 +9,7 @@ The UI follows a Netflix/YouTube-style mobile layout: dark theme, header + searc
 | Layer    | Tech                                        |
 | -------- | ------------------------------------------- |
 | Frontend | Next.js 15 (App Router, TypeScript, Tailwind v4) |
-| Backend  | Go (net/http, pgx) — dev server + Vercel serverless function |
+| Backend  | Go (net/http, pgx) — dev server + Vercel backend service |
 | Database | PostgreSQL 17                               |
 
 ```
@@ -18,15 +18,14 @@ questlog/                    # workspace folder (internal only)
 │   ├── app/                 # dashboard, search, library, game form/detail
 │   ├── components/          # cards, rows, star rating, nav
 │   └── lib/                 # API client + types
-├── api/                     # Vercel Go serverless function (serves /api/*)
-├── backend/                 # Go API
-│   ├── cmd/server/          # dev server on :8080
-│   ├── cmd/migrate/         # standalone migrations runner (used by CI)
+├── backend/                 # Go API (module questlog)
+│   ├── main.go               # server entrypoint (also the Vercel backend service)
+│   ├── cmd/migrate/          # standalone migrations runner (used by CI)
 │   └── internal/            # api, model, repo, catalog, steam, igdb, config
 ├── .github/workflows/       # CI/CD (tests + migrate + Vercel deploy)
 ├── scripts/seed.sh          # sample data
 ├── docker-compose.yml       # Postgres only
-├── vercel.json              # /api/* rewrites → Go function
+├── vercel.json              # services: frontend (Next) + backend (Go); /api/* → backend
 └── Makefile
 ```
 
@@ -61,7 +60,12 @@ Open `http://<your-machine-ip>:3000` from the phone (both devices on the same ne
 
 ## Deploy to Vercel
 
-The repo is set up for a single Vercel project: the Next.js app at the root, and the Go API as a serverless function behind `/api/*` (`vercel.json` rewrites). On Vercel the frontend calls the API same-origin, so no `NEXT_PUBLIC_API_URL` is needed.
+The repo uses Vercel's **Services** model: two services in one project, deployed together with shared routing and env vars.
+
+- `frontend` — the Next.js app at the repo root (`framework: nextjs`)
+- `backend` — the Go API at `backend/` (entrypoint `backend/main.go`), routed from `/api/*` via `vercel.json` rewrites
+
+On Vercel the frontend calls the API same-origin, so no `NEXT_PUBLIC_API_URL` is needed.
 
 **One-time setup**
 

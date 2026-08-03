@@ -12,7 +12,7 @@ db-logs:
 
 ## Apps -----------------------------------------------------------------
 backend:          ## Run the Go API on :8080 (needs Postgres on :5432)
-	cd backend && go run ./cmd/server
+	cd backend && go run .
 
 frontend:         ## Run the Next.js dev server on :3000
 	npm run dev
@@ -30,7 +30,6 @@ test:             ## Run backend unit tests + frontend type check
 
 build:
 	cd backend && go build ./...
-	cd api && go build ./...
 	npm run build
 
 clean:
