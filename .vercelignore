@@ -1,0 +1,12 @@
+# Files Vercel should not upload (build happens in the cloud)
+node_modules
+.next
+.vercel
+.reasonix
+pgdata
+.DS_Store
+*.log
+coverage.out
+
+# Go test/build artifacts — not needed for the api function build
+backend/**/*_test.go

@@ -45,17 +45,15 @@ coverage.html
 *.cover
 
 # ── Node / Next.js frontend ──────────────────────────────────────────────────
-frontend/node_modules/
 node_modules/
-frontend/.next/
-frontend/out/
-frontend/dist/
-frontend/build/
-*.tsbuildinfo
-.eslintcache
 .next/
 out/
 dist/
+*.tsbuildinfo
+.eslintcache
+
+# ── Vercel ────────────────────────────────────────────────────────────────────
+.vercel/
 
 # ── Postgres / local data ────────────────────────────────────────────────────
 pgdata/

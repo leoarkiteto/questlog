@@ -9,23 +9,24 @@ The UI follows a Netflix/YouTube-style mobile layout: dark theme, header + searc
 | Layer    | Tech                                        |
 | -------- | ------------------------------------------- |
 | Frontend | Next.js 15 (App Router, TypeScript, Tailwind v4) |
-| Backend  | Go 1.26 (net/http, pgx)                     |
+| Backend  | Go (net/http, pgx) — dev server + Vercel serverless function |
 | Database | PostgreSQL 17                               |
 
 ```
-gamelog/
-├── backend/            Go REST API
-│   ├── cmd/server/     entrypoint (env config, migrations, server)
-│   └── internal/
-│       ├── api/        HTTP handlers + middleware
-│       ├── model/      Game model, status enum, validation
-│       └── repo/       pgx store + embedded SQL migrations
-├── frontend/           Next.js app
-│   ├── app/            dashboard, search, library, game form/detail
-│   ├── components/     cards, rows, star rating, nav
-│   └── lib/            API client + types
-├── scripts/seed.sh     sample data
-├── docker-compose.yml  Postgres only
+questlog/                    # workspace folder (internal only)
+├── app/                     # Next.js app at repo root (Vercel builds from here)
+│   ├── app/                 # dashboard, search, library, game form/detail
+│   ├── components/          # cards, rows, star rating, nav
+│   └── lib/                 # API client + types
+├── api/                     # Vercel Go serverless function (serves /api/*)
+├── backend/                 # Go API
+│   ├── cmd/server/          # dev server on :8080
+│   ├── cmd/migrate/         # standalone migrations runner (used by CI)
+│   └── internal/            # api, model, repo, catalog, steam, igdb, config
+├── .github/workflows/       # CI/CD (tests + migrate + Vercel deploy)
+├── scripts/seed.sh          # sample data
+├── docker-compose.yml       # Postgres only
+├── vercel.json              # /api/* rewrites → Go function
 └── Makefile
 ```
 
@@ -52,11 +53,30 @@ Open http://localhost:3000.
 The main device is a smartphone. Run the backend on your machine, then point the frontend at your machine's LAN address:
 
 ```bash
-# in frontend/, before `npm run dev`:
+# before `npm run dev`:
 NEXT_PUBLIC_API_URL=http://<your-machine-ip>:8080 npm run dev
 ```
 
 Open `http://<your-machine-ip>:3000` from the phone (both devices on the same network). The API already allows cross-origin requests for this setup.
+
+## Deploy to Vercel
+
+The repo is set up for a single Vercel project: the Next.js app at the root, and the Go API as a serverless function behind `/api/*` (`vercel.json` rewrites). On Vercel the frontend calls the API same-origin, so no `NEXT_PUBLIC_API_URL` is needed.
+
+**One-time setup**
+
+1. Import the repo at https://vercel.com/new (framework: Next.js — detected automatically).
+2. Create a Postgres database (Vercel Storage → Postgres, or any Postgres/Neon/Supabase URL) and add these **Vercel project env vars**:
+   `DATABASE_URL`, `STEAM_API_KEY`, `IGDB_CLIENT_ID`, `IGDB_CLIENT_SECRET`
+3. Generate a token at https://vercel.com/account/tokens, then add these **GitHub repository secrets** (Settings → Secrets and variables → Actions):
+   - `VERCEL_TOKEN` — the token from step 3
+   - `VERCEL_ORG_ID` — your Vercel team/user id (from `npx vercel whoami` → or Project Settings)
+   - `VERCEL_PROJECT_ID` — the Vercel project id (Project Settings → General)
+   - `DATABASE_URL` — same URL as above (used by CI to run migrations before deploy)
+
+**Deploys**
+
+Push to `main` → GitHub Actions runs tests (Go + TypeScript + build); on main it also runs DB migrations (`go run ./backend/cmd/migrate`) and deploys to Vercel. Until the secrets above exist, the deploy job is skipped and only tests run.
 
 ## Configuration (backend)
 

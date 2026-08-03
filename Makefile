@@ -15,7 +15,10 @@ backend:          ## Run the Go API on :8080 (needs Postgres on :5432)
 	cd backend && go run ./cmd/server
 
 frontend:         ## Run the Next.js dev server on :3000
-	cd frontend && npm run dev
+	npm run dev
+
+migrate:          ## Apply DB migrations (reads DATABASE_URL from env/.env)
+	cd backend && go run ./cmd/migrate
 
 ## Helpers --------------------------------------------------------------
 seed:             ## Insert a few sample games
@@ -23,11 +26,12 @@ seed:             ## Insert a few sample games
 
 test:             ## Run backend unit tests + frontend type check
 	cd backend && go test ./...
-	cd frontend && npx tsc --noEmit
+	npx tsc --noEmit
 
 build:
 	cd backend && go build ./...
-	cd frontend && npm run build
+	cd api && go build ./...
+	npm run build
 
 clean:
-	rm -rf backend/bin frontend/.next
+	rm -rf backend/bin .next

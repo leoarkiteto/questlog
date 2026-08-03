@@ -1,11 +1,22 @@
 import type { CatalogAppDetails, CatalogResult, Game, GameInput, Status } from "./types";
 
 /**
- * Base URL of the Go API. Override at build/dev time with
- * NEXT_PUBLIC_API_URL, e.g. http://192.168.1.10:8080 when the
- * phone and the machine running the backend share a LAN.
+ * Base URL of the Go API. On Vercel the API runs as a serverless
+ * function on the SAME origin (/api/*), so the default is same-origin
+ * ("") on any non-local host. Local dev falls back to the Go dev
+ * server on :8080 (override with NEXT_PUBLIC_API_URL if needed).
  */
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+function apiBase(): string {
+  const env = process.env.NEXT_PUBLIC_API_URL;
+  if (env !== undefined && env !== "") return env;
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname;
+    if (host !== "localhost" && host !== "127.0.0.1") return ""; // same origin (Vercel)
+  }
+  return "http://localhost:8080";
+}
+
+const API_BASE = apiBase();
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
