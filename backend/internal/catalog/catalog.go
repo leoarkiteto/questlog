@@ -7,8 +7,8 @@ import (
 	"sort"
 	"strings"
 
-	"gamelog/internal/igdb"
-	"gamelog/internal/steam"
+	"questlog/internal/igdb"
+	"questlog/internal/steam"
 )
 
 // Service combines Steam (primary) and IGDB (fallback for non-Steam

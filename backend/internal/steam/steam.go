@@ -99,7 +99,7 @@ type AppDetails struct {
 }
 
 // AppDetails fetches the Steam store page for an app and maps it to
-// the fields GameLog cares about.
+// the fields Questlog cares about.
 func (c *Client) AppDetails(ctx context.Context, appID int64) (*AppDetails, error) {
 	u := fmt.Sprintf("https://store.steampowered.com/api/appdetails?appids=%d&l=en", appID)
 	body, err := c.get(ctx, u)
@@ -193,7 +193,7 @@ func (c *Client) get(ctx context.Context, url string) ([]byte, error) {
 		return nil, err
 	}
 	// Steam's CDN sometimes rejects requests without a browser-like UA.
-	req.Header.Set("User-Agent", "Mozilla/5.0 (GameLog/1.0)")
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Questlog/1.0)")
 	req.Header.Set("Accept", "application/json")
 
 	resp, err := c.http.Do(req)

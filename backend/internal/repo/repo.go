@@ -9,7 +9,7 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"gamelog/internal/model"
+	"questlog/internal/model"
 )
 
 

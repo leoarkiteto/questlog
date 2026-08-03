@@ -1,4 +1,4 @@
-# GameLog
+# Questlog
 
 Personal game collection manager — track games you **want to play/buy**, games you're **currently playing**, and games you've **played** (with 5-star ratings and the platform you played on). No accounts, no auth: it's your app on your machine.
 
@@ -84,7 +84,7 @@ The Docker compose db uses user/password `gamelog` / `gamelog`, database `gamelo
 
 Getting covers and info from Steam is built into the flow:
 
-- **New / edit form:** start typing a title and catalog matches appear automatically under the field (500ms debounce) — tap one and GameLog fills the cover, year, genre, platform, and description, and links the game to its catalog id. There's a live cover preview in the form. Fields you already filled (e.g. a Switch platform) are kept.
+- **New / edit form:** start typing a title and catalog matches appear automatically under the field (500ms debounce) — tap one and Questlog fills the cover, year, genre, platform, and description, and links the game to its catalog id. There's a live cover preview in the form. Fields you already filled (e.g. a Switch platform) are kept.
 - **Detail page:** the **Get cover online** button enriches any existing entry with cover + metadata — rating, status, and notes are preserved. When there's no exact title match it picks the closest IGDB match (and tells you which one it chose).
 
 ## Non-Steam games (PS5, Switch, …)

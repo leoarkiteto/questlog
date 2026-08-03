@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 
 export const metadata: Metadata = {
-  title: "GameLog — my games",
+  title: "Questlog — my games",
   description: "Track games I want, am playing, and have played.",
 };
 

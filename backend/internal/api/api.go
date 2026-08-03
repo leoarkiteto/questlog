@@ -10,9 +10,9 @@ import (
 
 	"github.com/jackc/pgx/v5"
 
-	"gamelog/internal/catalog"
-	"gamelog/internal/model"
-	"gamelog/internal/repo"
+	"questlog/internal/catalog"
+	"questlog/internal/model"
+	"questlog/internal/repo"
 )
 
 // Server holds dependencies for the HTTP API.

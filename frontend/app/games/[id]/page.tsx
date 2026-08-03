@@ -66,7 +66,7 @@ export default function GameDetail() {
 
   const remove = async () => {
     if (!game) return;
-    if (!window.confirm(`Delete "${game.title}" from your GameLog?`)) return;
+    if (!window.confirm(`Delete "${game.title}" from your Questlog?`)) return;
     await api.remove(game.id);
     router.push("/");
   };

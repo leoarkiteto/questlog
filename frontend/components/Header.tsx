@@ -21,10 +21,10 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
         <Link href="/" className="flex items-center gap-2 shrink-0">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-red-600 to-red-800 text-sm font-black text-white shadow-md shadow-red-900/40">
-            G
+            Q
           </span>
           <span className="text-lg font-black tracking-tight text-white">
-            Game<span className="text-red-500">Log</span>
+            Quest<span className="text-red-500">log</span>
           </span>
         </Link>
 

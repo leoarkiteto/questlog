@@ -7,12 +7,12 @@ import (
 	"os"
 	"time"
 
-	"gamelog/internal/api"
-	"gamelog/internal/catalog"
-	"gamelog/internal/config"
-	"gamelog/internal/igdb"
-	"gamelog/internal/repo"
-	"gamelog/internal/steam"
+	"questlog/internal/api"
+	"questlog/internal/catalog"
+	"questlog/internal/config"
+	"questlog/internal/igdb"
+	"questlog/internal/repo"
+	"questlog/internal/steam"
 )
 
 func main() {
@@ -54,7 +54,7 @@ func main() {
 		),
 		ReadHeaderTimeout: 5 * time.Second,
 	}
-	log.Printf("gamelog API listening on http://localhost:%s", port)
+	log.Printf("questlog API listening on http://localhost:%s", port)
 	if err := srv.ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}

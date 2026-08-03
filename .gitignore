@@ -1,4 +1,4 @@
-# ── GameLog — personal game tracker (Go + Next.js + Postgres) ────────────────
+# ── Questlog — personal game tracker (Go + Next.js + Postgres) ─────────────────
 
 # ── OS / editor junk ─────────────────────────────────────────────────────────
 .DS_Store
@@ -9,6 +9,9 @@ Thumbs.db
 .vscode/
 .fleet/
 .zed/
+
+# ── Tooling metadata (Reasonix screenshots/attachments) ──────────────────────
+.reasonix/
 
 # ── Logs ─────────────────────────────────────────────────────────────────────
 *.log

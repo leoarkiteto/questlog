@@ -1,4 +1,4 @@
-module gamelog
+module questlog
 
 go 1.26
 

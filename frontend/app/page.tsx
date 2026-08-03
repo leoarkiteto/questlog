@@ -109,7 +109,7 @@ export default function Dashboard() {
       ) : (
         <div className="mx-4 rounded-2xl bg-gradient-to-r from-red-950/60 to-zinc-900 px-5 py-8 ring-1 ring-white/10 sm:mx-6 sm:px-8">
           <h1 className="text-2xl font-black text-white sm:text-3xl">
-            Welcome to your GameLog
+            Welcome to your Questlog
           </h1>
           <p className="mt-1 text-sm text-zinc-400">
             Track games you want to play, are playing, and have played.
