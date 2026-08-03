@@ -22,8 +22,19 @@ type Store struct {
 }
 
 // New opens a connection pool and verifies connectivity.
+//
+// QueryExecModeCacheDescribe makes the pool compatible with connection
+// poolers in transaction mode (e.g. Neon's pooled DATABASE_URL behind
+// pgbouncer) — prepared-statement caching breaks under pgbouncer, but
+// cache-describe works with both pooled and direct connections.
 func New(ctx context.Context, url string) (*Store, error) {
-	pool, err := pgxpool.New(ctx, url)
+	cfg, err := pgxpool.ParseConfig(url)
+	if err != nil {
+		return nil, fmt.Errorf("parse database url: %w", err)
+	}
+	cfg.ConnConfig.DefaultQueryExecMode = pgx.QueryExecModeCacheDescribe
+
+	pool, err := pgxpool.NewWithConfig(ctx, cfg)
 	if err != nil {
 		return nil, fmt.Errorf("connect to postgres: %w", err)
 	}
