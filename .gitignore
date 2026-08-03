@@ -1,0 +1,63 @@
+# ── GameLog — personal game tracker (Go + Next.js + Postgres) ────────────────
+
+# ── OS / editor junk ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+.fleet/
+.zed/
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Environment / secrets (keep the *.example templates!) ────────────────────
+.env
+.env.*
+!.env.example
+!.env.*.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/.env
+backend/.env.*
+!backend/.env.example
+!backend/.env.*.example
+
+# ── Go backend ───────────────────────────────────────────────────────────────
+backend/bin/
+bin/
+*.exe
+*.test
+*.out
+coverage.out
+coverage.html
+*.cover
+
+# ── Node / Next.js frontend ──────────────────────────────────────────────────
+frontend/node_modules/
+node_modules/
+frontend/.next/
+frontend/out/
+frontend/dist/
+frontend/build/
+*.tsbuildinfo
+.eslintcache
+.next/
+out/
+dist/
+
+# ── Postgres / local data ────────────────────────────────────────────────────
+pgdata/
+postgres-data/
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
