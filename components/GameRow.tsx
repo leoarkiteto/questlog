@@ -1,5 +1,6 @@
 import Link from "next/link";
 import GameCard from "./GameCard";
+import StatusIcon from "./StatusIcon";
 import { statusInfo } from "@/lib/types";
 import type { Game, Status } from "@/lib/types";
 
@@ -19,8 +20,8 @@ export default function GameRow({ status, games, showAllHref }: Props) {
   return (
     <section className="mb-8">
       <div className="mb-3 flex items-baseline justify-between px-4 sm:px-6">
-        <h2 className="flex items-baseline gap-2 text-lg font-bold text-zinc-100">
-          <span className={`h-3.5 w-1 rounded-full ${info.accent.replace("text-", "bg-")}`} />
+        <h2 className="flex items-center gap-2 text-lg font-bold text-zinc-100">
+          <StatusIcon status={status} className={`h-4 w-4 ${info.accent}`} />
           {info.label}
           <span className="text-xs font-medium text-zinc-500">{games.length}</span>
         </h2>

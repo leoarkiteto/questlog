@@ -6,6 +6,7 @@ import { COMMON_PLATFORMS, STATUSES } from "@/lib/types";
 import type { CatalogResult, Game, GameInput, Status } from "@/lib/types";
 import StarRating from "./StarRating";
 import GameCover from "./GameCover";
+import StatusIcon from "./StatusIcon";
 
 const SOURCE_LABEL: Record<string, string> = {
   steam: "Steam",
@@ -138,12 +139,13 @@ export default function GameForm({ initial, submitLabel, onSubmit }: Props) {
               type="button"
               onClick={() => setStatus(s.value)}
               aria-pressed={status === s.value}
-              className={`rounded-xl px-2 py-2.5 text-xs font-semibold ring-1 transition active:scale-[0.98] ${
+              className={`flex items-center gap-1.5 rounded-xl px-2 py-2.5 text-xs font-semibold ring-1 transition active:scale-[0.98] ${
                 status === s.value
                   ? "bg-red-600 text-white ring-red-500"
                   : "bg-zinc-900 text-zinc-400 ring-white/10 hover:text-zinc-200"
               }`}
             >
+              <StatusIcon status={s.value} className="h-3.5 w-3.5" />
               {s.label}
             </button>
           ))}

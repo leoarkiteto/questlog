@@ -6,6 +6,7 @@ import { STATUSES } from "@/lib/types";
 import type { Game, Status } from "@/lib/types";
 import GameCard from "@/components/GameCard";
 import EmptyState from "@/components/EmptyState";
+import StatusIcon from "@/components/StatusIcon";
 
 const FILTERS: { value: Status | "all"; label: string }[] = [
   { value: "all", label: "All" },
@@ -39,12 +40,13 @@ export default function LibraryPage() {
           <button
             key={f.value}
             onClick={() => setFilter(f.value)}
-            className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition ${
+            className={`flex shrink-0 items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition ${
               filter === f.value
                 ? "bg-red-600 text-white"
                 : "bg-zinc-900 text-zinc-400 ring-1 ring-white/10 hover:text-zinc-200"
             }`}
           >
+            {f.value !== "all" && <StatusIcon status={f.value as Status} className="h-3.5 w-3.5" />}
             {f.label}
           </button>
         ))}
