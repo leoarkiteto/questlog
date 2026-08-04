@@ -74,15 +74,15 @@ export const STATUSES: StatusInfo[] = [
 export const statusInfo = (s: Status): StatusInfo =>
   STATUSES.find((x) => x.value === s) ?? STATUSES[0];
 
-export const COMMON_PLATFORMS = [
-  "PC",
+/** Platform choices offered in the add/edit form dropdown. */
+export const PLATFORMS = [
+  "Nintendo Switch",
+  "Nintendo Switch 2",
   "PlayStation 5",
   "PlayStation 4",
-  "Xbox Series X|S",
+  "Xbox Series",
   "Xbox One",
-  "Nintendo Switch",
-  "Nintendo 3DS",
-  "Mobile (iOS)",
-  "Mobile (Android)",
-  "Retro (NES/SNES/Mega Drive)",
-];
+  "PlayStation 3",
+  "PC",
+  "Mobile",
+] as const;

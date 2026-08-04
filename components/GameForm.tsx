@@ -2,7 +2,7 @@
 
 import { FormEvent, useRef, useState } from "react";
 import { api } from "@/lib/api";
-import { COMMON_PLATFORMS, STATUSES } from "@/lib/types";
+import { PLATFORMS, STATUSES } from "@/lib/types";
 import type { CatalogResult, Game, GameInput, Status } from "@/lib/types";
 import StarRating from "./StarRating";
 import GameCover from "./GameCover";
@@ -245,19 +245,23 @@ export default function GameForm({ initial, submitLabel, onSubmit }: Props) {
           <label htmlFor="platform" className={label}>
             Platform
           </label>
-          <input
+          <select
             id="platform"
             value={platform}
             onChange={(e) => setPlatform(e.target.value)}
-            placeholder="e.g. Nintendo Switch"
-            list="platforms"
             className={field}
-          />
-          <datalist id="platforms">
-            {COMMON_PLATFORMS.map((p) => (
-              <option key={p} value={p} />
+          >
+            <option value="">— Select platform —</option>
+            {/* Keep values outside the list (Steam/IGDB auto-fill, legacy games) */}
+            {platform !== "" && !PLATFORMS.some((p) => p === platform) && (
+              <option value={platform}>{platform}</option>
+            )}
+            {PLATFORMS.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
             ))}
-          </datalist>
+          </select>
         </div>
         <div>
           <label htmlFor="year" className={label}>

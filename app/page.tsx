@@ -124,7 +124,7 @@ export default function Dashboard() {
             key={s.value}
             status={s.value}
             games={byStatus(s.value)}
-            showAllHref="/library"
+            showAllHref={`/library?filter=${s.value}`}
           />
         ))}
       </div>

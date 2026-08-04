@@ -49,7 +49,7 @@ export default function GameCard({ game, className = "" }: Props) {
             {game.rating}/5
           </span>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center justify-between gap-1">
           <h3
             className="min-w-0 truncate text-sm font-semibold text-zinc-100"
             title={game.title}
