@@ -81,7 +81,7 @@ func (s *Server) handleListGames(w http.ResponseWriter, r *http.Request) {
 	if raw := r.URL.Query().Get("status"); raw != "" {
 		st := model.Status(raw)
 		if !st.Valid() {
-			writeError(w, http.StatusBadRequest, "invalid status filter (use wishlist, playing, played)")
+			writeError(w, http.StatusBadRequest, "invalid status filter (use wishlist, purchased, playing, played, dropped)")
 			return
 		}
 		status = &st

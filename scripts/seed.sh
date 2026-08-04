@@ -45,4 +45,6 @@ post "Balatro"               playing  0 "Mobile (iOS)"       2024 "Roguelike"   
 post "Silksong"              wishlist 0 "Nintendo Switch"    "" "Metroidvania"       1030300
 post "GTA VI"                wishlist 0 "PlayStation 5"      "" "Open World"
 post "Half-Life 3"           wishlist 0 "PC"                 "" "FPS"
+post "Baldur's Gate 3"       purchased 0 "PC"                2023 "CRPG"              1086940
+post "Starfield"             dropped   2 "PC"                2023 "Space RPG"
 echo "Done."

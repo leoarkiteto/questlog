@@ -5,7 +5,7 @@ import BottomNav from "@/components/BottomNav";
 
 export const metadata: Metadata = {
   title: "Questlog — my games",
-  description: "Track games I want, am playing, and have played.",
+  description: "Track games I want, own, am playing, finished, or dropped.",
 };
 
 export const viewport: Viewport = {

@@ -1,6 +1,6 @@
 # Questlog
 
-Personal game collection manager — track games you **want to play/buy**, games you're **currently playing**, and games you've **played** (with 5-star ratings and the platform you played on). No accounts, no auth: it's your app on your machine.
+Personal game collection manager — track games you **want to play/buy**, games you've **purchased** but haven't started, games you're **currently playing**, games you've **played** (with 5-star ratings and the platform you played on), and games you **dropped**. No accounts, no auth: it's your app on your machine.
 
 The UI follows a Netflix/YouTube-style mobile layout: dark theme, header + search, horizontal-scrolling rows per list, a featured hero card, and a bottom nav on phones.
 
@@ -133,8 +133,8 @@ All catalog calls are proxied through the Go backend (`GET /api/catalog/search?q
 
 | Field       | Notes                                              |
 | ----------- | -------------------------------------------------- |
-| `status`    | `wishlist` · `playing` · `played`                  |
-| `rating`    | 0 (unrated) .. 5 stars — set when you've played it |
+| `status`    | `wishlist` · `purchased` · `playing` · `played` · `dropped` |
+| `rating`    | 0 (unrated) .. 5 stars — set when you've played it (or dropped it) |
 | `platform`  | the platform you played on (PC, Switch, …)         |
 | `year`/`genre`/`cover_url`/`description`/`notes` | metadata, description usually from Steam |
 | `steam_appid` | Steam app id when the game was linked via Steam  |
@@ -143,7 +143,7 @@ All catalog calls are proxied through the Go backend (`GET /api/catalog/search?q
 
 ```
 GET    /api/health
-GET    /api/games            ?status=wishlist|playing|played
+GET    /api/games            ?status=wishlist|purchased|playing|played|dropped
 POST   /api/games
 GET    /api/games/{id}
 PUT    /api/games/{id}

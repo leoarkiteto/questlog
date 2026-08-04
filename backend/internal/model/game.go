@@ -11,17 +11,19 @@ import (
 type Status string
 
 const (
-	StatusWishlist Status = "wishlist" // I wish to play/buy
-	StatusPlaying  Status = "playing"  // currently playing
-	StatusPlayed   Status = "played"   // already played
+	StatusWishlist  Status = "wishlist"  // I wish to play/buy
+	StatusPurchased Status = "purchased" // bought but not played yet
+	StatusPlaying   Status = "playing"   // currently playing
+	StatusPlayed    Status = "played"    // already played
+	StatusDropped   Status = "dropped"   // tried, didn't finish
 )
 
 // AllStatuses lists every valid status, in display order.
-var AllStatuses = []Status{StatusWishlist, StatusPlaying, StatusPlayed}
+var AllStatuses = []Status{StatusWishlist, StatusPurchased, StatusPlaying, StatusPlayed, StatusDropped}
 
 func (s Status) Valid() bool {
 	switch s {
-	case StatusWishlist, StatusPlaying, StatusPlayed:
+	case StatusWishlist, StatusPurchased, StatusPlaying, StatusPlayed, StatusDropped:
 		return true
 	}
 	return false
@@ -32,10 +34,14 @@ func (s Status) Display() string {
 	switch s {
 	case StatusWishlist:
 		return "Wish to Play / Buy"
+	case StatusPurchased:
+		return "Purchased"
 	case StatusPlaying:
 		return "Currently Playing"
 	case StatusPlayed:
 		return "Played"
+	case StatusDropped:
+		return "Dropped"
 	}
 	return string(s)
 }
@@ -63,7 +69,7 @@ func (g *Game) Validate() error {
 		return errors.New("title is required")
 	}
 	if !g.Status.Valid() {
-		return fmt.Errorf("invalid status %q (must be one of: wishlist, playing, played)", g.Status)
+		return fmt.Errorf("invalid status %q (must be one of: wishlist, purchased, playing, played, dropped)", g.Status)
 	}
 	if g.Rating < 0 || g.Rating > 5 {
 		return errors.New("rating must be between 0 and 5")

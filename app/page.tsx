@@ -112,7 +112,7 @@ export default function Dashboard() {
             Welcome to your Questlog
           </h1>
           <p className="mt-1 text-sm text-zinc-400">
-            Track games you want to play, are playing, and have played.
+            Track games you want to play, own, are playing, finished, or dropped.
           </p>
         </div>
       )}

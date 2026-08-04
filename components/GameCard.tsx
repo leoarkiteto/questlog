@@ -12,7 +12,7 @@ interface Props {
 
 /**
  * Card shown in the horizontal rows: cover, title, platform · year,
- * and star rating for played games.
+ * and star rating for played/dropped games.
  */
 export default function GameCard({ game }: Props) {
   const meta = [game.platform, game.year?.toString()].filter(Boolean).join(" · ");
@@ -28,7 +28,7 @@ export default function GameCard({ game }: Props) {
           src={game.coverUrl}
           className="aspect-[2/3] w-full rounded-lg shadow-lg ring-1 ring-white/10 transition duration-200 group-hover:ring-red-500/60 group-hover:shadow-red-500/10"
         />
-        {game.status === "played" && game.rating > 0 && (
+        {(game.status === "played" || game.status === "dropped") && game.rating > 0 && (
           <span className="absolute right-1.5 top-1.5 rounded-md bg-black/70 px-1.5 py-0.5 backdrop-blur">
             <StarRating value={game.rating} size="sm" />
           </span>

@@ -131,7 +131,7 @@ export default function GameForm({ initial, submitLabel, onSubmit }: Props) {
       {/* Status picker */}
       <div>
         <span className={label}>List</span>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="flex flex-wrap gap-2">
           {STATUSES.map((s) => (
             <button
               key={s.value}
@@ -225,7 +225,10 @@ export default function GameForm({ initial, submitLabel, onSubmit }: Props) {
       {/* Rating — centerpiece for played games */}
       <div>
         <span className={label}>
-          Rating {status === "played" ? "· how much did you like it?" : "· rate once played"}
+          Rating{" "}
+          {status === "played" || status === "dropped"
+            ? "· how much did you like it?"
+            : "· rate once played"}
         </span>
         <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-900 px-4 py-3">
           <StarRating value={rating} onChange={setRating} size="lg" />

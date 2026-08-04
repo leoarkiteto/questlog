@@ -8,7 +8,7 @@ func TestStatusValid(t *testing.T) {
 			t.Errorf("expected %q to be valid", s)
 		}
 	}
-	for _, s := range []Status{"", "owned", "dropped", "PLAYING"} {
+	for _, s := range []Status{"", "owned", "finished", "PLAYING"} {
 		if s.Valid() {
 			t.Errorf("expected %q to be invalid", s)
 		}
