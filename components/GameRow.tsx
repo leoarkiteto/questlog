@@ -40,9 +40,13 @@ export default function GameRow({ status, games, showAllHref }: Props) {
           Nothing here yet — add a game with the + button.
         </p>
       ) : (
-        <div className="no-scrollbar flex snap-x gap-3 overflow-x-auto px-4 pb-2 sm:px-6">
+        <div className="no-scrollbar flex snap-x gap-3 overflow-x-auto px-4 pb-2 scroll-px-4 sm:px-6 sm:scroll-px-6">
           {games.map((g) => (
-            <GameCard key={g.id} game={g} />
+            <GameCard
+              key={g.id}
+              game={g}
+              className="w-32 shrink-0 snap-start sm:w-40"
+            />
           ))}
           <div className="w-2 shrink-0" aria-hidden />
         </div>

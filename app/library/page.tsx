@@ -63,7 +63,7 @@ export default function LibraryPage() {
       ) : (
         <div className="grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
           {shown.map((g) => (
-            <GameCard key={g.id} game={g} />
+            <GameCard key={g.id} game={g} className="w-full" />
           ))}
         </div>
       )}

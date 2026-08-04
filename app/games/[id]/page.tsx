@@ -232,7 +232,11 @@ export default function GameDetail() {
             </h2>
             <div className="no-scrollbar flex snap-x gap-3 overflow-x-auto pb-2">
               {related.map((g) => (
-                <GameCard key={g.id} game={g} />
+                <GameCard
+                  key={g.id}
+                  game={g}
+                  className="w-32 shrink-0 snap-start sm:w-40"
+                />
               ))}
             </div>
           </section>
